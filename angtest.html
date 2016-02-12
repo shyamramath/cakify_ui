@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="myApp">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Test Page</title>
+	<script src="assets/js/angular.min.js"></script>
+	<script type="text/javascript" src="assets/js/appCntrl.js"></script>
+	
+</head>
+
+<body>
+	<div>  
+		<form ng-controller="userController" ng-submit="createUser()">
+	    	<legend>Checking User using Spring Controller</legend>
+	 	    <label>Name: </label> 
+	    	<input type="text" id="name" name="name" ng-model="user.name" placeholder="User Name" value="shyam"> 
+	 	    <label>Password:</label>
+	    	<input type="text" id="pwd" name="pwd"   ng-model="user.pwd" placeholder="Your Password" value="sachib">
+	        <button class="btn btn-primary">Add</button>
+	        <br/>
+	        <div>
+	        <label>{{lists}}</label> 
+			<ul ng-repeat="list in lists">
+				<li>{{list.name }}</li>
+				<li>{{list.pwd }}</li>
+			</ul> 
+		</div>
+	    </form>
+	</div>
+
+</body>
+
+</html>

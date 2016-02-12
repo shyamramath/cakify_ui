@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Cakes</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="shortcut icon" href="http://malabarhangouts.com/images/cake.jpe" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets-lens/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<noscript><link rel="stylesheet" href="assets-lens/css/noscript.css" /></noscript>
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/skel.min.js"></script>
+		<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		
+		<script src="assets/js/angular.min.js"></script>
+		<script src="assets/js/cakeorderApp.js"></script>
+
+		<script type="text/javascript" src="assets/js/underscore-min.js"></script>
+    	<script type="text/javascript" src="assets/js/json2.js"></script>
+
+		<script type="text/javascript">
+
+		var selectedCakeName;
+		var selectedCakePrice;
+		var selectedCakeId;
+		var returnUrl;
+		var bakerySelected;
+		var cakeInfoJsonPassed;
+
+		$(document).ready(function(){
+
+   			bakerySelected=getParameterByName('selectedBakery');
+   			cakeInfoJsonPassed=getParameterByName('cakeInfoJsonStored');
+
+   			var temp=cakeInfoJsonPassed.replace(/\//g, 'ForwardSlash');
+   			temp=JSON.parse(temp);
+
+   			var template = _.template( $("#cake-gallery-results").text() );
+            $("#attach").html( template(temp));
+
+			
+			$(".cakecheckoutbutton").click(function(){
+        		$("#urltohomepage").attr("href", returnUrl);
+        		window.location = $("#urltohomepage").attr("href");
+    		});
+
+			//Fires when the cake-thumbnail is selected .
+            $(".cakeclick" ).click(function() {
+            	
+            	$("#greeting").hide();	
+            	$("#cakeinfo").show();
+            	$("#cakecheckoutform").show();
+
+
+				var cakeName=$(this).attr("data-cakename");
+				var cakePrice=$(this).attr("data-cakeprice");
+				var cakeimage=$(this).attr("data-cakeimage");
+				var buttonid=$(this).attr("data-id");
+				
+				$("#"+buttonid).show();
+				
+				$("#cakeNameJustClicked").text(cakeName);
+				$("#cakePriceJustClicked").text(cakePrice);
+
+				selectedCakeName=cakeName;
+				selectedCakePrice=cakePrice;
+
+				$("#cakeNameId").val(cakeName);
+				$("#bakerySelectedId").val(cakePrice);
+				$("#cakePriceId").val(cakePrice);
+				$("#cakeImageId").val(cakeimage);
+
+				returnUrl="index.html?cakeName="+selectedCakeName+"&bakerySelected="+bakerySelected+"&cakePrice="+cakePrice+"&cakeimage="+cakeimage;
+			});
+            main.init();
+           
+		});
+
+
+		function getParameterByName(name) {
+    		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        	results = regex.exec(location.search);
+    		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+
+		function selectingthevalue(cakeName,cakePrice){
+			selectedCakeName=cakeName;
+			selectedCakePrice=cakePrice;
+			returnUrl="index.html?cakeName="+selectedCakeName+"&bakerySelected="+bakerySelected+"&cakePrice="+cakePrice+"&cakeimage="+cakeimage;
+			$("#cakeNameJustClicked").text(cakeName);
+			$("#cakePriceJustClicked").text(cakePrice);
+		}
+		
+		</script>
+
+
+	<script type="text/template" id="cake-gallery-results">
+	<section id="thumbnails">
+		 <% _.each( target, function(result) {%>
+			<article class="thumbnail" >
+					<button type="button" class="cakeclick"  data-position='left center'  data-cakename='<%= result.cakename %>' data-cakeprice='<%= result.cakePrice %>' data-id='1234_<%= result.cakePrice %>' 
+					 data-cakeimage ='<%=result.cakeImage %>' > I like this </button>
+					<a class='thumbnail cakeclick' href='images-lens/cakesfull/<%=result.cakeImage %>' data-position='left center'  data-cakename='<%= result.cakename %>' 
+						data-cakeprice='<%= result.cakePrice %>' data-cakeimage ='<%=result.cakeImage %>' data-cakeid='1234' id='cakeclickID' data-id='1234_<%= result.cakePrice %>' ><img src='images-lens/thumbs/<%=result.cakeImage%>'  /></a>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="cakecheckoutbutton" id="1234_<%= result.cakePrice %>" style="display:none;" > Proceed to Checkout </button>
+					<font color="yellow">
+					<h2> <%= result.cakename %> ( Rs <%= result.cakePrice %> ) </h2>
+					<p>  <%= result.cakeDesc %> </p>
+					<h4>Rs <%= result.cakePrice %>  </h4>
+					</font>
+			</article>
+		<% }); %>
+	</section>	 
+    </script>
+
+	</head>
+	<body class="is-loading-0 is-loading-1 is-loading-2">
+
+
+		<div style="display:none">	
+			<form >
+	    	</form>
+		</div>
+	    </form>
+
+		<!-- Main -->
+			<div id="main">
+
+				<!-- Header -->
+					<header id="header">
+						
+						<div id="greeting" class="cakifydiv" >
+								<h1> Cake Gallery </h1>
+								<p> Please select the cake from the below listed  </p>
+						</div>
+
+						<div id="cakeinfo" style="display:none;" >
+							<h1 id="cakeNameJustClicked">  </h2>
+							<h3>  Rs: <a href="" id="cakePriceJustClicked" > </a></h3>
+						</div>
+					</header>
+
+					<!-- Thumbnail -->
+					<div id="attach"> 
+					</div>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<form action="index.html" method="get" style="display:none;" id="cakecheckoutform">
+							<input type="hidden" name="cakeName"  		id="cakeNameId" />
+							<input type="hidden" name="bakerySelected"  id="bakerySelectedId" />
+							<input type="hidden" name="cakePrice"  		id="cakePriceId" />
+							<input type="hidden" name="cakeimage"  		id="cakeImageId" />
+							
+
+							<button type="button" class="cakecheckoutbutton" > Proceed to Checkout </button>
+						</form>
+
+						<ul class="copyright">
+							<li>&copy; </li><li><a id="urltohomepage" href="index.html?id=shyam" style="display:none;"/></li>
+						</ul>
+
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets-lens/js/jquery.min.js"></script>
+			<script src="assets-lens/js/skel.min.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets-lens/js/main.js"></script>
+
+	</body>
+</html>
