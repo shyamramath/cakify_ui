@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cakify Online Orders</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://malabarhangouts.com/cakify/assets/js/underscore-min.js"></script>
+<script type="text/javascript" src="http://malabarhangouts.com/cakify/assets/js/json2.js"></script> 
+
+<style type="text/css">
+   table, td, th {    
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 15px;
+}
+
+
+</style>
+
+<script type="text/javascript">
+
+        $(document).ready(function(){
+            console.log("------ Loading -------- ");
+            var localcategoryinfo="http://malabarhangouts.com/online/cakeadmin/cakeorderlist";
+            $.getJSON(localcategoryinfo, function(data){
+                        var occationList = { target:data };
+                        console.log(occationList);
+                        var template = _.template( $("#cakeorder-list-section-template").text() );
+                        $("#accordion").html(template(occationList));
+             });
+        });
+
+</script>
+
+<script type="text/template" id="cakeorder-list-section-template">
+         <% _.each( target, function(result) {%>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><%=result.name %> </a> ( <%=result.orderId %> )
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <table id="t01">
+                            <tr>
+                                <th>Email</th>
+                                <th>bakeryname</th>
+                                <th>cakename</th>
+                                <th>Landline</th>
+                                <th>eggless</th>
+                                <th>orderDate</th>
+                                <th>deliveryDate</th>
+                                <th>noofcakes</th>
+                                <th>kilograms</th>
+                                <th>Cake Price</th>
+                                <th>deliveryCharges</th>
+                                <th>checkOutTotal</th>
+                            </tr>
+                            <tr>
+                               <td><%=result.email %></td>
+                               <td><%=result.bakeryname %></td>
+                               <td><%=result.cakename %></td>
+                               <td><%=result.landline %></td>
+                               <td><%=result.eggless %></td>
+                               <td><%=result.orderDate %></td>
+                               <td><%=result.deliveryDate %></td>
+                               <td><%=result.noofcakes %></td>
+                               <td><%=result.kilograms %></td>
+                               <td><%=result.amount %></td>
+                               <td><%=result.deliveryCharges%></td>
+                               <td><%=result.checkOutTotal%></td>
+                            </tr>    
+                        </table>
+
+                        <p> Message on Cake : <h4> <%=result.messageoncake %></h4> </p>
+
+                        <P> Delivery Address : <h4> <%=result.deliveryAddress %> </h4> </p>
+
+                        <img src="http://malabarhangouts.com/cakify/images-gallery/thumbs/<%=result.cakeImage %>"
+                    </div>
+                </div>
+            </div>
+         <% }); %>
+</script>
+
+
+</head>
+<body>
+<div class="bs-example">
+    <div class="panel-group" id="accordion">
+        
+    </div>
+	<p><strong>Note:</strong> Click on the linked heading text to expand or collapse accordion panels.</p>
+</div>
+</body>
+</html>                                		                                		

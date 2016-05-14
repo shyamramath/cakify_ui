@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Hangpout Local search</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="http://www.malabarhangouts.com/online/resources/js/underscore/underscore-min.js"></script>
+<script type="text/javascript" src="http://www.malabarhangouts.com/online/resources/js/underscore/json2.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/search.css" />
+<link rel="stylesheet" type="text/css" href="css/accordion.css" />
+
+<script type="text/template" id="template-search-results">
+        <div class="acc-container">
+                <% _.each( target, function(result) {%>
+                    
+                    <div class="acc-btn"><h2 class="selected"> <%= result.bussName %>  </h2> <%= result.description %> </div>
+                    <div class="acc-content open">
+                        <div class="acc-content-inner">
+                            <p><%= result.street_address %>.</p>
+                            <p>Email : <%= result.email %> , Phone :<%= result.phone %>.</p>
+                             
+                         </div>
+                    </div>
+
+                <% }); %>
+          </div>
+</script>
+
+<script>
+
+
+
+
+       
+
+        function ajaxDivRefreshOnFormSubmit() {
+            var searchkey=$("#s").val();
+            //var endpointUrl="http://malabarhangouts.com/online/sitesearch/person/"+searchkey;
+            var endpointUrl="http://localhost:8080/abc/sitesearch/person/"+searchkey;
+            $.getJSON(endpointUrl, function(data){
+                $("#output").html( "<pre>" + JSON.stringify(data) + "</pre>") ;
+                $("a").removeClass("btn-warning");
+                $("#json").addClass("btn-warning");
+
+                var srchresults = { target:data };
+                var template = _.template( $("#template-search-results").text() );
+                $("#output").html( template(srchresults) );
+                resetaccordion();
+                test();
+                $("a").removeClass("btn-warning");
+                $("#html").addClass("btn-warning");
+            });
+
+        }
+
+
+
+function test(){
+    var animTime = 300,
+            clickPolice = false;
+                  
+                  var currIndex = $(this).index('.acc-btn'),
+                      targetHeight = $('.acc-content-inner').eq(currIndex).outerHeight();
+               
+                  $('.acc-btn h1').removeClass('selected');
+                  $(this).find('h1').addClass('selected');
+                  
+                  $('.acc-content').stop().animate({ height: 0 }, animTime);
+                  $('.acc-content').eq(currIndex).stop().animate({ height: targetHeight }, animTime);
+
+                  setTimeout(function(){ clickPolice = false; }, animTime);
+}
+
+function resetaccordion(){
+    var animTime = 300,
+    clickPolice = false;
+  
+              $(document).on('touchstart click', '.acc-btn', function(){
+                if(!clickPolice){
+                   clickPolice = true;
+                  
+                  var currIndex = $(this).index('.acc-btn'),
+                      targetHeight = $('.acc-content-inner').eq(currIndex).outerHeight();
+               
+                  $('.acc-btn h1').removeClass('selected');
+                  $(this).find('h1').addClass('selected');
+                  
+                  $('.acc-content').stop().animate({ height: 0 }, animTime);
+                  $('.acc-content').eq(currIndex).stop().animate({ height: targetHeight }, animTime);
+
+                  setTimeout(function(){ clickPolice = false; }, animTime);
+                }
+                
+              });
+
+}
+
+
+</script>
+
+
+</head>
+
+<body>
+
+<div id="page">
+
+    
+    
+    <form id="searchForm" method="post">
+		<fieldset>
+        
+           	<input id="s" type="text" />
+            
+            <input type="button" value="Submit" id="submitButton" onclick="ajaxDivRefreshOnFormSubmit()" />
+            
+            <div id="searchInContainer">
+                <input type="radio" name="check" value="site" id="searchSite" checked />
+                <label for="searchSite" id="siteNameLabel">Search</label>
+                
+                <input type="radio" name="check" value="web" id="searchWeb" />
+                <label for="searchWeb">Search The Web</label>
+			</div>
+                        
+            <ul class="icons">
+                <li class="web" title="Web Search" data-searchType="web">Web</li>
+                <li class="images" title="Image Search" data-searchType="images">Images</li>
+                <li class="news" title="News Search" data-searchType="news">News</li>
+                <li class="videos" title="Video Search" data-searchType="video">Videos</li>
+            </ul>
+            
+        </fieldset>
+    </form>
+
+<div id="resultsDiv"></div>
+
+<div id="output"></div>
+
+  
+
+
+<!-- It would be great if you leave the link back to the tutorial. Thanks! -->
+<p class="credit"><a href="#">Malabar hangouts &amp; Google</a></p>
+    
+
+</body>
+</html>

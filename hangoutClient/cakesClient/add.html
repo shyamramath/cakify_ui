@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)http://www.grocerycrud.com/demo/bootstrap_theme/add -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+		
+<script src="http://www.malabarhangouts.com/cannoneers/resources/scripts/jquery-1.8.0.min.js"></script>
+<script src="http://www.malabarhangouts.com/cannoneers/resources/scripts/jquery-ui.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://www.malabarhangouts.com/online/resources/js/underscore/json2.js"></script>
+
+<link rel="stylesheet" href="./add_files/newtab.css" type="text/css">
+<link rel="stylesheet" href="./add_files/chosen.css" type="text/css">
+<link rel="stylesheet" href="./add_files/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="./add_files/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="./add_files/common.css" type="text/css">
+<link rel="stylesheet" href="./add_files/general.css" type="text/css">
+<link rel="stylesheet" href="./add_files/add-edit-form.css" type="text/css">
+	
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta name="robots" content="noindex, nofollow">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body>
+<script type="text/javascript">
+
+$(function () {
+  loadkeys();
+
+});
+
+function loadkeys(){
+     var endpointUrl="http://malabarhangouts.com/online/sitesearch/search/keys/";
+            $.getJSON(endpointUrl, function(data){
+               // $("#output").html( "<pre>" + JSON.stringify(data) + "</pre>") ;
+               $(data).each(function(){
+                    var option = $('<option />');
+                    option.attr('value', this.keyCode).text(this.keyString);
+                    $('#myDropDown').append(option);
+                });
+
+            });
+}
+
+
+var ajax_relation_url = '/demo/bootstrap_theme/ajax_relation';
+function ajaxDivRefreshOnFormSubmit() {
+    
+    var methodURL = "http://malabarhangouts.com/online/backoffice/addNewBussinesforsearch";
+    
+    $.ajax({
+        type : "POST",
+        url : methodURL,
+        data : $("#crudForm").serialize(),
+        success : function(data) {
+            if(data=="Done"){
+                alert("done");
+                $("#bodypartmapId").prop("disabled", false);
+                $("#workoutDays").prop("disabled", false);
+            }else{
+                
+            }
+        },
+        error : function(e) {
+            alert(" Oops process aborted , something went wrong. ");
+        }
+    });
+}
+</script>
+<div class="crud-form" data-unique-hash="a2ad475d60b22954085c657a73309b8f">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-label">
+                    <div class="floatL l5">
+                        Add Customer                    </div>
+                    <div class="floatR r5 minimize-maximize-container minimize-maximize">
+                        <i class="fa fa-caret-up"></i>
+                    </div>
+                    <div class="floatR r5 gc-full-width">
+                        <i class="fa fa-expand"></i>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="form-container table-container">
+                        <form action="http://localhost:8080/abc/backoffice/addNewBussinesforsearch" method="post" id="crudForm"  class="form-horizontal" accept-charset="utf-8">
+                                                            <div class="form-group customerName_form_group">
+                                    <label class="col-sm-3 control-label">
+                                       Bussiness Name                                    </label>
+                                    <div class="col-sm-9">
+                                        <input id="field-customerName" class="form-control" name="bussname" type="text" value="" maxlength="50">                                    </div>
+                                </div>
+                                                            <div class="form-group contactLastName_form_group">
+                                    <label class="col-sm-3 control-label">
+                                        Bussinesss Type                                  </label>
+                                    <div class="col-sm-9">
+                                        <input id="field-contactLastName" class="form-control" name="busstype" type="text" value="" maxlength="50">                                    </div>
+                                </div>
+                                                            <div class="form-group contactFirstName_form_group">
+                                    <label class="col-sm-3 control-label">
+                                        Email                                    </label>
+                                    <div class="col-sm-9">
+                                        <input id="field-contactFirstName" class="form-control" name="email" type="text" value="" maxlength="50">                                    </div>
+                                </div>
+                                                            <div class="form-group phone_form_group">
+                                    <label class="col-sm-3 control-label">
+                                        Phone                                    </label>
+                                    <div class="col-sm-9">
+                                        <input id="field-phone" class="form-control" name="phone" type="text" value="" maxlength="50">                                    </div>
+                                </div>
+                                                            <div class="form-group addressLine1_form_group">
+                                    <label class="col-sm-3 control-label">
+                                        AddressLine1                                    </label>
+                                    <div class="col-sm-9">
+                                        <input id="field-addressLine1" class="form-control" name="address" type="text" value="" maxlength="500">                                    </div>
+                                </div>
+                                                            
+                                <div class="form-group city_form_group">
+                                    <label class="col-sm-3 control-label">
+                                        Description                                    </label>
+                                    <div class="col-sm-9">
+                                        <input id="field-city" class="form-control" name="desc" type="text" value="" maxlength="500">                                    </div>
+                                </div>
+                                                         
+                                 
+                                <div class="form-group salesRepEmployeeNumber_form_group">
+                                    <label class="col-sm-3 control-label">
+                                        Search Key Selection                                 </label>
+                                  
+                                        <select id="myDropDown" name="key" class="chosen-select chzn-done" data-placeholder="Select from Employeer" style="width: 300px;">
+                                            <option vale="0">Please selet a keyword group </option>
+                                        </select>
+                              
+                                                            
+                                                        <!-- Start of hidden inputs -->
+                                                        <!-- End of hidden inputs -->
+                            
+                            <div class="small-loading hidden" id="FormLoading">Loading, saving data...</div>
+
+                            <div class="form-group">
+                                <div id="report-error" class="report-div error bg-danger" style="display:none"></div>
+                                <div id="report-success" class="report-div success bg-success" style="display:none"></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-7">
+
+                                    <button class="btn btn-default btn-success b10" type="button" id="form-button-save" onclick="ajaxDivRefreshOnFormSubmit() ">
+                                        <i class="fa fa-check"></i>
+                                        Save                                    </button>
+                                                                            <button class="btn btn-info b10" type="button" id="save-and-go-back-button">
+                                            <i class="fa fa-rotate-left"></i>
+                                            Save and go back to list                                        </button>
+                                        <button class="btn btn-default cancel-button b10" type="button" id="cancel-button">
+                                            <i class="fa fa-warning"></i>
+                                            Cancel                                        </button>
+                                                                    </div>
+                            </div>
+                        </form>                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+	var validation_url = '/demo/bootstrap_theme/insert_validation';
+	var list_url = '/demo/bootstrap_theme';
+
+	var message_alert_add_form = "The data you had insert may not be saved.\nAre you sure you want to go back to list?";
+	var message_insert_error = "An error has occurred on insert.";
+</script><script type="text/javascript">
+var js_date_format = 'dd/mm/yy';
+</script>
+<script type="text/javascript">
+	var default_javascript_path = '/assets/grocery_crud/js';
+	var default_css_path = '/assets/grocery_crud/css';
+	var default_texteditor_path = '/assets/grocery_crud/texteditor';
+	var default_theme_path = '/assets/grocery_crud/themes';
+	var base_url = '/';
+
+</script>
+<script type="text/javascript">
+
+	  
+
+	</script>
+</body></html>

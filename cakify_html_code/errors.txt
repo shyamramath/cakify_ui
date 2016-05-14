@@ -1,0 +1,37 @@
+-----------------------------------------------------------------------------------------
+Errors 
+--------------------------------------------------------------------
+
+C:\work\hadoop-2.7.1>hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.7.1.jar grep input .  'dfs[a-z.]+'
+15/12/17 21:12:49 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+15/12/17 21:12:51 INFO mapreduce.JobSubmitter: Cleaning up the staging area /tmp/hadoop-yarn/staging/shyam/.staging/job_1450396472347_0004
+org.apache.hadoop.mapreduce.lib.input.InvalidInputException: Input path does not exist: hdfs://localhost:9000/user/shyam/input
+        at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.singleThreadedListStatus(FileInputFormat.java:323)
+        at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.listStatus(FileInputFormat.java:265)
+        at org.apache.hadoop.mapreduce.lib.input.FileInputFormat.getSplits(FileInputFormat.java:387)
+        at org.apache.hadoop.mapreduce.JobSubmitter.writeNewSplits(JobSubmitter.java:301)
+        at org.apache.hadoop.mapreduce.JobSubmitter.writeSplits(JobSubmitter.java:318)
+        at org.apache.hadoop.mapreduce.JobSubmitter.submitJobInternal(JobSubmitter.java:196)
+        at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1290)
+        at org.apache.hadoop.mapreduce.Job$10.run(Job.java:1287)
+        at java.security.AccessController.doPrivileged(Native Method)
+        at javax.security.auth.Subject.doAs(Subject.java:422)
+        at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1657)
+        at org.apache.hadoop.mapreduce.Job.submit(Job.java:1287)
+        at org.apache.hadoop.mapreduce.Job.waitForCompletion(Job.java:1308)
+        at org.apache.hadoop.examples.Grep.run(Grep.java:78)
+        at org.apache.hadoop.util.ToolRunner.run(ToolRunner.java:70)
+        at org.apache.hadoop.examples.Grep.main(Grep.java:103)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:497)
+        at org.apache.hadoop.util.ProgramDriver$ProgramDescription.invoke(ProgramDriver.java:71)
+        at org.apache.hadoop.util.ProgramDriver.run(ProgramDriver.java:144)
+        at org.apache.hadoop.examples.ExampleDriver.main(ExampleDriver.java:74)
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+        at java.lang.reflect.Method.invoke(Method.java:497)
+        at org.apache.hadoop.util.RunJar.run(RunJar.java:221)
+        at org.apache.hadoop.util.RunJar.main(RunJar.java:136)

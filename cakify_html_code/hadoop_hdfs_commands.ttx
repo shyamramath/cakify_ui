@@ -1,0 +1,29 @@
+Delete a directory
+============================================
+hdfs dfs -rm -r /user/ambili/testjob
+
+
+
+
+put file to hdfs
+--------------------------------------
+hdfs dfs -put file.txt /user/shyam
+
+
+
+
+Add a file to HDFS from local file system 
+-------------------------------------------------
+hdfs dfs -put file.txt /user/ambili/file.txt
+
+
+
+
+Running wordcount job
+---------------------------------------------------------------------------------------------------------------
+hadoop jar wordcount.jar com.hadoop.wordcount.WordCount /user/ambili/file.txt /user/shyam/wordcountoutput
+
+
+View file
+-----------------------------------------------
+hadoop fs -cat /user/ambili/file.txt
