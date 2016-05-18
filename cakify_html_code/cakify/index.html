@@ -64,7 +64,7 @@
 			 <span class="icon major fa-code"></span>
 				<h3> <%= result.occationname %> </h3>
 				<p>  Select your cake from our cake gallery  .</p>
-				<span class="button scrolly viewcakesgallery" id="viewCakeGalleryId" onclick="viewCakesGalley('<%= result.occationid %>','<%=result.bakeryid %>')" > View Cakes  </span>
+				<span class="button scrolly viewcakesgallery" id="viewCakeGalleryId" onclick="viewCakesGalley('<%= result.occationid %>','<%=result.bakeryid %>','<%=result.bakeryUrl %>')" > View Cakes  </span>
 			</section>
 		 <% }); %>
 		</script>
@@ -90,7 +90,7 @@
 	    	</form>
 
 	    	<!-- <form action="index-lens.html" method="get" > -->
-	    	<form action="index-gallery.html" method="get" >
+	    	<form action="index-gallery.html" method="get" id="view-cake-form" name="view-cake-form" >
 	    		<input type="hidden" id="selectedBakeryId"  	name="selectedBakery"   	/>
 	    		<input type="hidden" id="currentSelbakeryId"  	name="bakeryId"   	/>
 	    		<input type="submit" id="viewCakeinfoGallery" />

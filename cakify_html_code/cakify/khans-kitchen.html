@@ -1,0 +1,367 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Cakes Now in Kozhikode Calicut | Bakery in Calicut Kozhikode | Online Cake Delivery in Kozhikode Calicut | Cake Delivery in Kozhikode Calicut | Malabar Hangouts </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="shortcut icon" href="http://malabarhangouts.com/images/cake.jpe" />
+		<meta name="Keywords" content="Cake Delivery in Kozhikode Calicut, Cakes in Kozhikode Calicut, Cake Suppliers Calicut Kozhikode, Cake Manufactures Calicut Kozhikode, Bakery in Calicut Kozhikode, Online Cake Delivery in Kozhikode Calicut, Cakes Now in Kozhikode Calicut, Valentines Cake Kozhikode Calicut, Birthday Cake Kozhikode Calicut, Wedding Cake Kozhikode Calicut, Black Forest Calicut Kozhikode, White Forest Calicut Kozhikode, Chocolate Cake Calicut Kozhikode, Calicut Kozhikode Cakes, Best Cakes In Calicut Kozhikode, Calicut Kozhikode Online Cakes, Order Cakes Online Calicut Kozhikode, Order Cakes Online Delivery Calicut Kozhikode, Door Delivery Kozhikode Calicut, Free Cake Delivery Kozhikode Calicut, Chocotree Calicut Kozhikode, Khans Chocotree Calicut Kozhikode, Cochin Bakery Calicut Kozhikode, Ojin Bakery Calicut Kozhikode, Regal Bakery Calicut Kozhikode, Kozhikodans Bakery Calicut, Cake Manufactures Calicut Kozhikode, Bakes Calicut Kozhikode, Malabar Hangouts, India Kerala, Calicut."/>
+		<meta name="description" content="MalabarHangouts is a leading online Cake distributor & Supplier like Cakes Now in Kozhikode Calicut, Cake Delivery in Kozhikode Calicut, Cake Manufactures in Calicut Kozhikode, Online Cake Delivery in Kozhikode Calicut, Bakery in Calicut Kozhikode, Valentines Cake Kozhikode Calicut, Birthday Cake Kozhikode Calicut, Wedding Cake Kozhikode Calicut, Cake Suppliers Calicut Kozhikode, Black Forest Calicut Kozhikode, White Forest Calicut Kozhikode, Chocolate Cake Calicut Kozhikode, Calicut Kozhikode Cakes, Best Cakes In Calicut Kozhikode, Calicut Kozhikode Online Cakes, Order Cakes Online Calicut Kozhikode, Order Cakes Online Delivery Calicut Kozhikode, Door Delivery Kozhikode Calicut, Free Cake Delivery Kozhikode Calicut, Chocotree Calicut Kozhikode, Khans Chocotree Calicut Kozhikode, Cochin Bakery Calicut Kozhikode, Ojin Bakery Calicut Kozhikode, Regal Bakery Calicut Kozhikode, Kozhikodans Bakery Calicut, Bakes Calicut Kozhikode, Malabar Hangouts, India Kerala, Calicut."/>
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets-gallery/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!-- Scripts -->
+		<script src="assets-gallery/js/jquery.min.js"></script>
+		<script src="assets-gallery/js/jquery.poptrox.min.js"></script>
+		<script src="assets-gallery/js/skel.min.js"></script>
+		<script src="assets-gallery/js/util.js"></script>
+		<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+		<script src="assets-gallery/js/main.js"></script>
+
+
+		<script src="assets/js/angular.min.js"></script>
+		<script src="assets/js/cakeorderApp.js"></script>
+
+		<script type="text/javascript" src="assets/js/underscore-min.js"></script>
+    	<script type="text/javascript" src="assets/js/json2.js"></script>
+
+    	<script type="text/javascript">
+
+		var selectedCakeName;
+		var selectedCakePrice;
+		var selectedCakeId;
+		var returnUrl;
+		var bakerySelected;
+		var cakeInfoJsonPassed;
+		var eggless;
+		var quantity=0;
+		var totalCalculated=0;
+		var cakeImage;
+		var unitCakePrice;
+		var kilos;
+		var bakeryId;
+		var noofcakes=0;
+
+		$(document).ready(function(){
+
+   			bakerySelected=getParameterByName('selectedBakery');
+   			cakeInfoJsonPassed=getParameterByName('cakeInfoJsonStored');
+   			bakeryId=getParameterByName('bakeryId');
+
+   			$("#bakIdPassed").val(bakeryId);
+
+
+   			var cakeInfoJSON=JSON.parse(localStorage.getItem("dataCache"));
+   			var template = _.template( $("#cake-gallery-results").text() );
+            $("#main").html( template(cakeInfoJSON));
+			
+			$(".cakecheckoutbutton").click(function(){
+        		$("#urltohomepage").attr("href", returnUrl);
+        		window.location = $("#urltohomepage").attr("href");
+    		});
+
+            //Fires when the cake image is selected from the gallery
+			$(".testClass").click(function(){
+				var cakeName=$(this).attr("data-cakename");
+				var cakeDesc=$(this).attr("data-cakedesc");
+				var cakePrice=$(this).attr("data-cakeprice");
+				cakeImage=$(this).attr("data-cakeimage");
+				
+
+				selectedCakeName=cakeName;
+				selectedCakePrice=cakePrice;
+					
+				var jsonData = {cakeImage:cakeImage,cakeName:cakeName,selectedCakePrice:cakePrice,cakeDesc:cakeDesc};
+				var template = _.template( $("#cake-detail-info").text() );
+            	$("#cake-info-detail-fly-panel").html( template(jsonData));
+
+
+            	$("#cakeNameId").val(cakeName);
+				$("#bakerySelectedId").val(cakePrice);
+				$("#cakePriceId").val(cakePrice);
+				
+				returnUrl="index.html?cakeName="+selectedCakeName+"&bakerySelected="+bakerySelected+"&cakePrice="+cakePrice+"&cakeimage="+cakeImage+"&eggoption="+eggless;
+			});
+
+			$(".viewcatClass").click(function(){
+				$("#viewCatId").click();
+			});
+
+			$(".viewBakeryClass").click(function(){
+				$("#viewBakeryId").click();
+			});
+			
+
+		});
+
+		function addtoCart(){
+			
+			eggless=$('#egglessId').val();
+			quantity=$('#quantity').val();
+			noofcakes=$('#noofCakeId').val();
+			$("#eggoptionId").val(eggless);
+
+			//var atLeastOneIsChecked = $('#checkArray:checkbox:checked').length > 0;
+			//$("#egglessId").attr("checked") ? alert("Checked") : alert("Unchecked");
+
+			if( eggless==0 ){
+				$("#valmessageplacehoder").text(" Please select egg option ");
+				$("#valmessageplacehoder").show();
+				return;
+			}
+
+			if( noofcakes==0 || quantity==0){
+				$("#valmessageplacehoder").text("please select no of cakes and quantity");
+				$("#valmessageplacehoder").show();
+				return;
+			}
+
+			$("#valmessageplacehoder").hide();
+
+			kilos = parseInt(quantity);
+			unitCakePrice=parseInt(selectedCakePrice);
+			totalCalculated=unitCakePrice*kilos;
+			totalCalculated=totalCalculated*noofcakes;
+
+			if("AVOID_EGG"==eggless){
+				var calcEgglessPrice=200*noofcakes;
+				totalCalculated=totalCalculated+calcEgglessPrice;
+				$("#isEggless").text(200*noofcakes);
+				$("#messageAlert").text(" eggless cake cost Rs:200 extra ");
+			}else{
+				$("#isEggless").text(0);
+			}
+
+			
+			$("#noofCakesSelected").text(noofcakes);
+			$("#unitCakePrice").text(unitCakePrice);
+			$("#qualtitySelected").text(kilos);
+			$("#totalCalculated").text(totalCalculated);
+			
+			$("#cakeinformationsection").hide();
+			$("#cartSection").show();
+
+			returnUrl="index.html?cakeName="+selectedCakeName+"&bakerySelected="+bakerySelected+"&cakePrice="+unitCakePrice+"&cakeimage="+cakeImage+"&eggoption="+eggless+"&kilos="+kilos+"&totalCalculated="+totalCalculated+"&noofcakes="+noofcakes+"&kilos="+kilos;
+
+		}
+
+		function checkout(){
+			console.log(returnUrl);
+			$("#urltohomepage").attr("href", returnUrl);
+        	window.location = $("#urltohomepage").attr("href");
+		}
+
+		function editcheckout(){
+			$("#cakeinformationsection").show();
+			$("#cartSection").hide();
+		}
+
+
+		function getParameterByName(name) {
+    		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        	results = regex.exec(location.search);
+    		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
+
+		function goBackToMainPage(action){
+			console.log(action);
+			if(action=="bakery"){
+				$("#viewBakeryId").click();
+			}else if(action=="category"){
+				$("#viewCatId").click();
+			}
+		}
+		
+		</script>
+
+
+	<script type="text/template" id="cake-gallery-results">
+		 <% _.each( target, function(result) {%>
+			<article class="thumb">
+							<span class="image testClass"><img src="images-gallery/thumbs/<%=result.cakeImage %>" alt="" /></span>
+							<h2><%=result.cakename %> 
+							(<font color="yellow"> Rs:<%=result.cakePrice%> per KG)</font></h2>
+							<p> <%=result.cakeDesc %>.</p>
+							<font color="yellow"><a  href="#footer" class="icon fa-info-circle  testClass" data-cakeprice="<%=result.cakePrice %>" 
+								data-cakename="<%=result.cakename%>" data-cakedesc="<%=result.cakeDesc %>" data-cakeimage="<%=result.cakeImage%>" 
+								id="buythiscakeid_<%=result.cakePrice%>_<%=result.cakeImage%>">Buy this Cake</a>
+							</font>
+							
+			</article>
+		<% }); %>
+    </script>
+
+    <script type="text/template" id="cake-detail-info" >
+
+    		<div id="cakeinformationsection" >
+    			<section id="cakeselectionvalmessage">
+    				<font color="yellow"><span id="valmessageplacehoder" >  </span></font>
+    			</section>
+				<section>
+					<h2><%=cakeName%> (Rs: <%=selectedCakePrice%> per KG) </h2>
+					<p><%=cakeDesc%>.</p>
+				</section>
+
+				<section>
+						<h2> CUSTOMIZE </h2>
+							<form method="post" action="#">
+								    <div class="field half first">
+									<select name="eggless" id="quantity">
+												<option value="0" selected > Kilo Grams </option>
+  												<option value="1">1</option>
+  												<option value="2">2</option>
+  												<option value="3">3</option>
+  												<option value="4">4</option>
+  												<option value="5">5</option>
+									</select>
+
+									</div>
+									<div class="field half">
+											<select name="noofcakes" id="noofCakeId">
+												<option value="0" selected > No of Cakes </option>
+												<option value="1">1</option>
+  												<option value="2">2</option>
+  												<option value="3">3</option>
+  												<option value="4">4</option>
+  												<option value="5">5</option>
+											</select>
+									</div>
+
+									<div class="field half first">
+											<select name="eggless" id="egglessId">
+												<option value="0" > EGGLESS ? </option>
+  												<option value="AVOID_EGG">Yes</option>
+  												<option value="ADD_EGG">No</option>
+											</select>
+									</div>
+										<!-- div class="field">
+											<textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
+										</div-->
+										<ul class="actions" >
+											<li>
+												<button type="button" class="special addtoCart " onclick="addtoCart()">NEXT</button>
+											</li>
+										</ul>
+									</form>
+				</section>
+						
+			</div>
+			<div>
+					
+				<section style="display:none" id="cartSection"> 
+						<h2> YOUR CART <font color="yellow"> (<b id="messageAlert"> </b>) </font> </h2>
+							<!-- ul>
+								<li><span class="label">Cake Price  -  Rs: <span id="unitCakePrice">  </span>  * <span id="qualtitySelected">  </span> Kg  =  <span id="totalCalculated" >  </span></li>
+							</ul>
+							<ul>
+								<li><span class="label">Eggless :</span> <span id="isEggless">  </span> </li>
+							</ul -->
+							
+							
+							<table>
+								<thead>
+    							<tr>
+								      <th>Item </th>
+								      <th>Price </th>
+    							</tr>
+  								</thead>
+								 <tbody>
+								    <tr>
+								      <td>Cake Price (Rs) / Kilo </td>
+								      <td id="unitCakePrice" >  </td>
+								    </tr>
+								    <tr>
+								      <td>Kg</td>
+								      <td id="qualtitySelected" ></td>
+								    </tr>
+								    <tr>
+								      <td>No Of Cakes</td>
+								      <td id="noofCakesSelected" ></td>
+								    </tr>
+								    <tr>
+								      <td>Eggless</td>
+								      <td id="isEggless" ></td>
+								    </tr>
+								     <tr>
+								      <td>Total Price</td>
+								      <td id="totalCalculated"></td>
+								    </tr>
+								 </tbody>
+							</table>
+
+							<ul class="actions">
+								<li><input type="button" value="CHANGE" class="special cakecheckoutbutton" onclick="editcheckout()"; /></li>
+								<li><input type="button" value="PROCEED TO CHECKOUT" class="special cakecheckoutbutton" onclick="checkout()"; /></li>
+							</ul>
+				</section>
+
+			</div>
+
+    </script>
+
+
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Header -->
+					<header id="header">
+						<h1> CLICK THE CAKE FOR DETAILS <strong><span id="currcakeselection">  </span></strong> </a>   </h1>
+						<nav>
+							<ul>
+								<li><input type="button"   class="special viewcatClass" value="CATEGORIES" onclick="goBackToMainPage('category')" />  </li>
+								<li><input type="button"   class="special viewcatClass" value="BAKERY" onclick="goBackToMainPage('bakery')" />  </li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+						
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer" class="panel">
+						<div class="inner split" id="cake-info-detail-fly-panel">
+						</div>
+						<form action="index.html" method="get" style="display:none;" id="cakecheckoutform">
+							<input type="hidden" name="cakeName"  		id="cakeNameId" />
+							<input type="hidden" name="bakerySelected"  id="bakerySelectedId" />
+							<input type="hidden" name="cakePrice"  		id="cakePriceId" />
+							<input type="hidden" name="cakeimage"  		id="cakeImageId" />
+							<input type="hidden" name="eggoption"  		id="eggoptionId" />
+							<input type="hidden" name="numOFcakes"  	id="nofoCakesSelected" />
+							<input type="hidden" name="kilos"  			id="kgsofCakesSelected" />
+							<button type="button" class="cakecheckoutbutton" > Proceed to Checkout </button>
+						</form>
+
+						<form action="index.html" method="get" style="display:none;" id="cakeCategories">
+							<input type="hidden" name="bakeryId"  		id="bakIdPassed" />
+							<input type="hidden" name="action"  		value="bakery" />
+							<button type="submit" class="viewCakeCategories" id="viewCatId">  </button>
+						</form>
+
+						<form action="index.html" method="get" style="display:none;" id="bakeryView">
+							<input type="hidden" 	name="bakeryId"  	id="bakIdPassed" />
+							<input type="hidden"    name="action"  		value="bakery" />
+							<button type="submit"  id="viewBakeryId">  </button>
+						</form>
+						<!-- hidden anchor - Shuttle back to index.hrml-->
+					    <a id="urltohomepage" href="index.html" style="display:none;"/>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets-gallery/js/jquery.min.js"></script>
+			<script src="assets-gallery/js/jquery.poptrox.min.js"></script>
+			<script src="assets-gallery/js/skel.min.js"></script>
+			<script src="assets-gallery/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets-gallery/js/main.js"></script>
+
+	</body>
+</html>

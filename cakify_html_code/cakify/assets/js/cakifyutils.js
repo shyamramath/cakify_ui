@@ -37,19 +37,17 @@ function getParameterByName(name) {
 
 
 
-			function viewCakesGalley(catId,bakeryId){
-				console.log(catId);
-				console.log(bakeryId);
+			function viewCakesGalley(catId,bakeryId,bakeryUrl){
 				var localendpointUrl=getEnpoint("cakes/"+catId+"/"+bakeryId);
-				console.log(localendpointUrl);
+				
 				$.getJSON(localendpointUrl, function(data){
                		var srchresults = { target:data };
                		cakeinfojson=JSON.stringify(srchresults);
                		localStorage.setItem("dataCache",cakeinfojson);
-
                		$("#currentSelbakeryId").val(currentbakeryId);
-               		var viewcakeurl="index-lens.html?selectedBakery="+selectedBakery;
+               		var viewcakeurl=bakeryUrl+"?selectedBakery="+selectedBakery;
 					$("#selectedBakeryId").val(selectedBakery);
+					$("#view-cake-form").attr("action", viewcakeurl);
         			$("#viewCakeinfoGallery").click();
             	});
 			}
