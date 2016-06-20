@@ -182,15 +182,14 @@
 	<script type="text/template" id="cake-gallery-results">
 		 <% _.each( target, function(result) {%>
 			<article class="thumb">
-							<span class="image testClass"><img src="images-gallery/thumbs/<%=result.cakeImage %>" alt="" /></span>
-							<h2><%=result.cakename %> 
+					<span class="image testClass"><img src="images-gallery/thumbs/<%=result.cakeImage %>" alt="" /></span>
+					<h2><%=result.cakename %> 
 							(<font color="yellow"> Rs:<%=result.cakePrice%> per KG)</font></h2>
 							<p> <%=result.cakeDesc %>.</p>
 							<font color="yellow"><a  href="#footer" class="icon fa-info-circle  testClass" data-cakeprice="<%=result.cakePrice %>" 
 								data-cakename="<%=result.cakename%>" data-cakedesc="<%=result.cakeDesc %>" data-cakeimage="<%=result.cakeImage%>" 
 								id="buythiscakeid_<%=result.cakePrice%>_<%=result.cakeImage%>">Buy this Cake</a>
 							</font>
-							
 			</article>
 		<% }); %>
     </script>
