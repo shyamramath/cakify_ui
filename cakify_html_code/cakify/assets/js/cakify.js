@@ -19,8 +19,13 @@ jQuery(document).ready(function($){
 			
 			$("#showWelcomeSection").click();
 
-			var bakeryEndpoint=getEnpoint("bakery");
 			
+			var sitehit=getEnpoint("sitehit");
+			$.getJSON(sitehit, function(data){
+               		console.log("site hit access loggged ");
+            });
+			
+			var bakeryEndpoint=getEnpoint("bakery");
 			$.getJSON(bakeryEndpoint, function(data){
                		var bakeryList = { target:data };
                		var template = _.template( $("#bakery-list-section").text() );
@@ -42,7 +47,7 @@ jQuery(document).ready(function($){
 			 	$("#fillBakerySection").show();
 			 	$("#bakery").show();
 			 	$("#fillBakerySection").click();
-			 });
+			});
 
 
 
