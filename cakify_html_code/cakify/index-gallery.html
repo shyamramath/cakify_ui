@@ -104,9 +104,6 @@
 			noofcakes=$('#noofCakeId').val();
 			$("#eggoptionId").val(eggless);
 
-			//var atLeastOneIsChecked = $('#checkArray:checkbox:checked').length > 0;
-			//$("#egglessId").attr("checked") ? alert("Checked") : alert("Unchecked");
-
 			if( eggless==0 ){
 				$("#valmessageplacehoder").text(" Please select egg option ");
 				$("#valmessageplacehoder").show();
@@ -128,9 +125,10 @@
 
 			if("AVOID_EGG"==eggless){
 				var calcEgglessPrice=200*noofcakes;
+				calcEgglessPrice=calcEgglessPrice*kilos;
 				totalCalculated=totalCalculated+calcEgglessPrice;
-				$("#isEggless").text(200*noofcakes);
-				$("#messageAlert").text(" eggless cake cost Rs:200 extra ");
+				$("#isEggless").text(calcEgglessPrice);
+				$("#messageAlert").text(" eggless cake cost Rs:200 extra per kilogram");
 			}else{
 				$("#isEggless").text(0);
 			}
